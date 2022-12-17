@@ -11,12 +11,13 @@ body {
 
 /** Global preloader styles **/
 .loader, .loader:before, .loader:after {
-	animation-duration: 2s;
+	animation-duration: 5s;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
 }
 
 .loader {
+	rotate: 45deg;
 	margin: 0 auto 1.5em auto;
 	position: relative;
 	width: 3em;

@@ -2,6 +2,7 @@ import React from "react";
 import { View, StatusBar, StyleSheet } from "react-native";
 import { LoadingPage } from "./LoadingPage";
 import { CenterContentsPage } from "./CenterContentsPage";
+import { CardOrigamiPage } from "./CardOrigamiPage";
 
 export const App = () => {
     return (
@@ -11,8 +12,9 @@ export const App = () => {
                 backgroundColor={"transparent"}
                 translucent={true}
             />
-            <LoadingPage />
-            <CenterContentsPage />
+            {/* <LoadingPage /> */}
+            {/* <CenterContentsPage /> */}
+            <CardOrigamiPage />
         </View>
     );
 };
