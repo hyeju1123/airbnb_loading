@@ -1,0 +1,37 @@
+html {
+    height: 100%
+  }
+
+body {
+    height: 100%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bar {
+    background: cyan;
+    width: 10px;
+    height: 10px;
+    animation: rotationDecelerate 0.3s linear, rotationLinear 2s linear 0.3s infinite;
+}
+
+@keyframes rotationDecelerate {
+    0% {
+        transform: rotate(0deg) translate(-120px);
+    }
+    100% {
+        transform: rotate(240deg) translate(-120px);
+    }
+    }
+
+@keyframes rotationLinear {
+    0% {
+        transform: rotate(240deg) translate(-120px);
+    }
+    100% {
+        transform: rotate(600deg) translate(-120px);
+    }
+}
+  

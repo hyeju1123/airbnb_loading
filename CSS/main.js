@@ -16,12 +16,34 @@ Spinnig.prototype._setupElements = function () {
     this.containerEl = containerEl;
 };
 
+Spinnig.prototype._firstLoop = function (index) {
+    const trajectorySize = Math.random() * 200 + 150;
+    const animationName = `rotation_${index}`;
+
+    const css = window.document.styleSheets[0];
+    css.insertRule(
+        `
+        @keyframes ${animationName} {
+            0% {
+                transform: rotate(0deg) translate(-${trajectorySize}px);
+            }
+            100% {
+                transform: rotate(120deg) translate(-${trajectorySize}px);
+            }
+        }
+    `,
+        index
+    );
+    return animationName;
+};
+
 Spinnig.prototype._randomlySetKeyframes = function (index) {
     const trajectorySize = Math.random() * 200 + 150;
     const animationName = `rotation_${index}`;
 
     const css = window.document.styleSheets[0];
-    css.insertRule(`
+    css.insertRule(
+        `
         @keyframes ${animationName} {
             0% {
                 transform: rotate(0deg) translate(-${trajectorySize}px);
@@ -30,7 +52,9 @@ Spinnig.prototype._randomlySetKeyframes = function (index) {
                 transform: rotate(360deg) translate(-${trajectorySize}px);
             }
         }
-    `);
+    `,
+        index
+    );
     return animationName;
 };
 
@@ -43,14 +67,25 @@ Spinnig.prototype._renderCircles = function () {
                 Math.floor(Math.random() * this.circleColors.length)
             ];
 
+        const firstAnimationName = this._firstLoop(index);
         const animationName = this._randomlySetKeyframes(index);
         value = document.createElement("div");
         value.classList.add("circle");
         value.style.width = circleSize;
         value.style.height = circleSize;
-        value.style.animation = `${animationName} ${speed} linear infinite`;
+        // value.style.animation = `${animationName} ${speed} linear infinite`;
+        value.style.animation = `${firstAnimationName} 3s ease-out, ${animationName} 3s linear 3s infinite`;
         value.style.backgroundColor = circleBackground;
 
+        // value.addEventListener("animationend", () => {
+        //     const ani = this._randomlySetKeyframes(index);
+        //     value.style.animation = `${ani} 10s linear infinite`;
+        // });
+
+        // value.addEventListener("animationend", () => {
+        //     value.style.animationPlayStatus = "paused";
+        //     // value.style.animation = `${animationName} 10s linear infinite`;
+        // });
         this.containerEl.appendChild(value);
     });
 };
