@@ -17,75 +17,65 @@ Spinnig.prototype._setupElements = function () {
 };
 
 Spinnig.prototype._firstLoop = function (index) {
-    const trajectorySize = Math.random() * 200 + 150;
-    const animationName = `rotation_${index}`;
+    const animationInfo = {
+        trajectorySize: Math.random() * 200 + 150,
+        animationName: `rotation_${index}`,
+    };
 
     const css = window.document.styleSheets[0];
     css.insertRule(
         `
-        @keyframes ${animationName} {
+        @keyframes ${animationInfo.animationName} {
             0% {
-                transform: rotate(0deg) translate(-${trajectorySize}px);
+                transform: rotate(0deg) translate(-${animationInfo.trajectorySize}px);
             }
             100% {
-                transform: rotate(120deg) translate(-${trajectorySize}px);
+                transform: rotate(240deg) translate(-${animationInfo.trajectorySize}px);
             }
         }
     `,
         index
     );
-    return animationName;
+    return animationInfo;
 };
 
-Spinnig.prototype._randomlySetKeyframes = function (index) {
-    const trajectorySize = Math.random() * 200 + 150;
-    const animationName = `rotation_${index}`;
-
+Spinnig.prototype._randomlySetKeyframes = function (index, animationInfo) {
     const css = window.document.styleSheets[0];
     css.insertRule(
         `
-        @keyframes ${animationName} {
+        @keyframes ${animationInfo.animationName}_linear {
             0% {
-                transform: rotate(0deg) translate(-${trajectorySize}px);
+                transform: rotate(240deg) translate(-${animationInfo.trajectorySize}px);
             }
             100% {
-                transform: rotate(360deg) translate(-${trajectorySize}px);
+                transform: rotate(600deg) translate(-${animationInfo.trajectorySize}px);
             }
         }
     `,
         index
     );
-    return animationName;
 };
 
 Spinnig.prototype._renderCircles = function () {
     Array.from({ length: 25 }, () => 0).map((value, index) => {
-        const speed = Math.floor(Math.random() * 30 + 10) + "s";
+        const first_speed = Math.random() * 0.2 + 0.3 + "s";
+        const linear_speed = Math.random() * 10 + 2 + "s";
         const circleSize = Math.random() * 8 + 2 + "px";
         const circleBackground =
             this.circleColors[
                 Math.floor(Math.random() * this.circleColors.length)
             ];
 
-        const firstAnimationName = this._firstLoop(index);
-        const animationName = this._randomlySetKeyframes(index);
+        const animationInfo = this._firstLoop(index);
+        this._randomlySetKeyframes(index, animationInfo);
         value = document.createElement("div");
         value.classList.add("circle");
         value.style.width = circleSize;
         value.style.height = circleSize;
-        // value.style.animation = `${animationName} ${speed} linear infinite`;
-        value.style.animation = `${firstAnimationName} 3s ease-out, ${animationName} 3s linear 3s infinite`;
+
+        value.style.animation = `${animationInfo.animationName} ${first_speed} linear, ${animationInfo.animationName}_linear ${linear_speed} linear ${first_speed} infinite`;
         value.style.backgroundColor = circleBackground;
 
-        // value.addEventListener("animationend", () => {
-        //     const ani = this._randomlySetKeyframes(index);
-        //     value.style.animation = `${ani} 10s linear infinite`;
-        // });
-
-        // value.addEventListener("animationend", () => {
-        //     value.style.animationPlayStatus = "paused";
-        //     // value.style.animation = `${animationName} 10s linear infinite`;
-        // });
         this.containerEl.appendChild(value);
     });
 };

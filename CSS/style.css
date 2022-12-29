@@ -26,3 +26,39 @@ body {
     margin: auto;
 }
 
+.contents-box {
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.airbnb-logo {
+    width: 50px;
+    height: 50px;
+    animation: logo-animation 0.3s linear;
+}
+
+.text {
+    width: 150px;
+    height: 50px;
+    position: relative;
+}
+
+@keyframes logo-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
