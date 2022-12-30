@@ -26,7 +26,7 @@ body {
     margin: auto;
 }
 
-.contents-box {
+.payment-items {
     border: 1px solid #ccc;
     width: 200px;
     height: 150px;
@@ -42,6 +42,22 @@ body {
     margin: auto;
 }
 
+.payment-icon {
+    width: 40px;
+    height: 30px;
+    border: 2px solid #d3235f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-icon-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    border: 2px solid #d3235f;
+}
+
 .airbnb-logo {
     width: 50px;
     height: 50px;
@@ -49,10 +65,18 @@ body {
 }
 
 .text {
-    width: 150px;
-    height: 50px;
+    width: auto;
+    border: 1px solid #ccc;
     position: relative;
+    font-size: large;
+    font-family: 'airbnbCereal';
 }
+
+@font-face {
+    font-family: 'airbnbCereal';
+    src: url('AirbnbCereal.ttf') format('truetype');
+}
+
 
 @keyframes logo-animation {
     0% {
@@ -60,5 +84,16 @@ body {
     }
     100% {
         transform: rotateY(-180deg);
+    }
+}
+
+@keyframes fade_out {
+    0% {
+        opacity: 1;
+        transform: translate(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-30px);
     }
 }

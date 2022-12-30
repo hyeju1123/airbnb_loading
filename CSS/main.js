@@ -6,6 +6,10 @@ const Spinnig = function (el) {
 
     this._setupElements();
     this._renderCircles();
+
+    // setTimeout(() => {
+    //     this._fadeOutCard();
+    // }, 5000);
 };
 
 Spinnig.prototype._setupElements = function () {
@@ -59,7 +63,7 @@ Spinnig.prototype._randomlySetKeyframes = function (index, animationInfo) {
 Spinnig.prototype._renderCircles = function () {
     Array.from({ length: 25 }, () => 0).map((value, index) => {
         const first_speed = Math.random() * 0.2 + 0.3 + "s";
-        const linear_speed = Math.random() * 10 + 2 + "s";
+        const linear_speed = Math.random() * 2 + 5 + "s";
         const circleSize = Math.random() * 8 + 2 + "px";
         const circleBackground =
             this.circleColors[
@@ -77,6 +81,14 @@ Spinnig.prototype._renderCircles = function () {
         value.style.backgroundColor = circleBackground;
 
         this.containerEl.appendChild(value);
+    });
+};
+
+Spinnig.prototype._fadeOutCard = function () {
+    const contentsBox = document.querySelector(".contents-box");
+    contentsBox.style.animation = "fade_out 1s linear";
+    contentsBox.addEventListener("animationend", () => {
+        contentsBox.style.display = "none";
     });
 };
 
